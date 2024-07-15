@@ -26,9 +26,13 @@ export const signup = asyncHandler(async (req: Request, res: Response) => {
     logger.info(`Creating new user: ${email}`);
     const user = new User({ username, email, password: hashedPassword });
     await user.save();
-
+    const token = jwt.sign(
+      { userId: user._id },
+      process.env.JWT_SECRET || 'your_jwt_secret',
+      { expiresIn: '1d' }
+    );
     logger.info(`User created successfully: ${email}`);
-    res.status(201).json({ message: 'User created successfully' });
+    res.status(201).json({ token, userId: user._id, username: user.username });
   } catch (error) {
     res.status(500);
     if (error instanceof Error) {

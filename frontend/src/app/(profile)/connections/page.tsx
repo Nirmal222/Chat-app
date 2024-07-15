@@ -49,7 +49,7 @@ const ConnectionsScreen: React.FC = () => {
         <Card className="w-full max-w-4xl mx-auto mt-8">
             <CardHeader>
                 <CardTitle>Your Connections</CardTitle>
-                <CardDescription>You have {connections.length} connections</CardDescription>
+                <CardDescription>You have {connections.length} connections <span className='font-semibold text-red-500'>{connections.length==0 && "Please search for connections"}</span></CardDescription>
             </CardHeader>
             <CardContent>
                 {loading ? (

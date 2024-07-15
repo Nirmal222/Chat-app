@@ -37,9 +37,14 @@ export default function Register() {
             })
 
             if (response.status >= 200 && response.status < 300) {
+                const { token, userId, username } = response.data
+
+                sessionStorage.setItem('token', token);
+                sessionStorage.setItem('userId', userId);
+                sessionStorage.setItem('username', username);
                 toast.success("Registration successful! Redirecting you to login...")
                 setTimeout(() => {
-                    router.push("/login")
+                    router.push("/connections")
                 }, 1500)
             } else {
                 throw new Error('Registration failed')

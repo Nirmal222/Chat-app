@@ -10,6 +10,5 @@ router.use(authMiddleware);
 router.get('/search', userController.searchUsers);
 router.get('/all', userController.getAllUsers);
 router.get('/:id', userController.getUser);
-router.delete('/:id', userController.deleteUser);
 router.post('/requests', getRequests)
 export default router;

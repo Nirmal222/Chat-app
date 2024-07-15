@@ -37,7 +37,7 @@ export default function Login() {
                 toast.success("Login successful! Redirecting you to connect.")
 
                 setTimeout(() => {
-                    router.push("/")
+                    router.push("/connections")
                 }, 1500)
             } else {
                 throw new Error('Login failed')
