@@ -61,6 +61,7 @@ The frontend of our real-time chat application provides a user-friendly interfac
 - Next JS
 - TypeScript
 - Socket.IO Client
+- Shadcn UI Library
 
 ## Project Structure
 ```
