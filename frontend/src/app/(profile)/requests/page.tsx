@@ -14,7 +14,7 @@ import axiosInstance from '@/utils/axios';
 import useStorage from '@/hooks/useSessionStorage';
 
 interface ConnectionRequest {
-    id: string;
+    _id: string;
     status: 'pending' | 'accepted' | 'rejected';
     username: string;
 }
@@ -45,23 +45,23 @@ const ConnectionRequestsScreen: React.FC = () => {
         }
     };
 
-    // const handleAccept = async (id: string) => {
-    //     try {
-    //         await api.acceptRequest(id);
-    //         setRequests(requests.filter(request => request.id !== id));
-    //     } catch (error) {
-    //         console.error('Error accepting request:', error);
-    //     }
-    // };
+    const handleAccept = async (id: string) => {
+        try {
+            await axiosInstance.patch(`/connections/respond`, { connectionId: id, status: 'accepted' });
+            setRequests(requests.filter(request => request._id !== id));
+        } catch (error) {
+            console.error('Error accepting request:', error);
+        }
+    };
 
-    // const handleReject = async (id: string) => {
-    //     try {
-    //         await api.rejectRequest(id);
-    //         setRequests(requests.filter(request => request.id !== id));
-    //     } catch (error) {
-    //         console.error('Error rejecting request:', error);
-    //     }
-    // };
+    const handleReject = async (id: string) => {
+        try {
+            await axiosInstance.patch(`/connections/respond`, { connectionId: id, status: 'rejected' });
+            setRequests(requests.filter(request => request._id !== id));
+        } catch (error) {
+            console.error('Error accepting request:', error);
+        }
+    };
 
     return (
         <Card className="w-full max-w-4xl mx-auto mt-8">
@@ -86,8 +86,8 @@ const ConnectionRequestsScreen: React.FC = () => {
                                     </div>
                                 </div>
                                 {request?.status == 'pending' && <div className="space-x-2">
-                                    <Button onClick={() => ""} variant="default">Accept</Button>
-                                    <Button onClick={() => ""} variant="outline">Reject</Button>
+                                    <Button onClick={() => handleAccept(request?._id)} variant="default">Accept</Button>
+                                    <Button onClick={() => handleReject(request?._id)} variant="outline">Reject</Button>
                                 </div>}
                             </div>
                         ))}

@@ -14,6 +14,7 @@ interface MessagingPopupProps {
     recipientId: string;
     recipientName: string;
     recipientAvatar?: string;
+    setMessagesPopup?: (value:boolean) => void
 }
 
 interface Message {
@@ -29,6 +30,7 @@ const MessagingPopup: React.FC<MessagingPopupProps> = ({
     recipientId,
     recipientName,
     recipientAvatar,
+    setMessagesPopup,
 }) => {
     const [socket, setSocket] = useState<Socket | null>(null);
     const [messages, setMessages] = useState<Message[]>([]);
@@ -105,8 +107,8 @@ const MessagingPopup: React.FC<MessagingPopupProps> = ({
         }
     };
     return (
-        <Card className="w-80 h-96 fixed bottom-4 right-4 flex flex-col">
-            <CardHeader className="px-3 py-2 bg-slate-600 text-white rounded-t-lg">
+        <Card className="w-80 h-96 fixed bottom-0 right-0 flex flex-col  shadow-lg">
+            <CardHeader className="px-3 py-2 bg-black text-white rounded-t-lg">
                 <div className='flex justify-between'>
                     <div className="flex items-center">
                         <Avatar className="h-8 w-8 mr-2">
@@ -115,7 +117,7 @@ const MessagingPopup: React.FC<MessagingPopupProps> = ({
                         </Avatar>
                         <span>{recipientName}</span>
                     </div>
-                    <Button variant="ghost" size="icon">
+                    <Button onClick={() =>  setMessagesPopup?.(false)} variant="ghost" size="icon">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
                     </Button>
                 </div>
@@ -131,8 +133,8 @@ const MessagingPopup: React.FC<MessagingPopupProps> = ({
                             >
                                 <span
                                     className={`inline-block p-2 rounded-lg ${message.sender === currentUserId
-                                        ? 'bg-slate-600 text-white'
-                                        : 'bg-gray-200 text-gray-800'
+                                        ? 'bg-slate-600 text-white rounded-r-xl rounded-b-xl'
+                                        : 'bg-gray-200 text-gray-800 rounded-l-xl rounded-b-xl'
                                         }`}
                                 >
                                     {message.content}

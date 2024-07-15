@@ -28,10 +28,11 @@ export default function Login() {
         try {
             const response = await axiosInstance.post("/auth/login", { data: { email, password } })
             if (response.status >= 200 && response.status < 300) {
-                const { token, userId } = response.data
+                const { token, userId, username } = response.data
 
-                sessionStorage.setItem('token', token)
-                sessionStorage.setItem('userId', userId)
+                sessionStorage.setItem('token', token);
+                sessionStorage.setItem('userId', userId);
+                sessionStorage.setItem('username', username);
 
                 toast.success("Login successful! Redirecting you to connect.")
 

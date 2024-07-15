@@ -68,7 +68,7 @@ export const login = asyncHandler(async (req: Request, res: Response) => {
     );
 
     logger.info(`User logged in successfully: ${email}`);
-    res.json({ token, userId: user._id });
+    res.json({ token, userId: user._id, username: user.username });
   } catch (error) {
     logger.error('Login error occurred', error as Error);
     res.status(500).json({ message: 'Internal server error' });

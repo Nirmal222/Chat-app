@@ -31,6 +31,7 @@ const Profile = ({ params }: ProfileProps) => {
     const [userData, setUserData] = useState<UserData | null>(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
+    const [messagePopup, setMessagesPopup] = useState<boolean>(false);
 
     const [connectionStatus, setConnectionStatus] = useState<string | null>(null);
     const fetchConnectionStatus = async (currentUserId: string, profileUserId: string) => {
@@ -82,7 +83,7 @@ const Profile = ({ params }: ProfileProps) => {
             case 'pending':
                 return <Button variant="outline" disabled>Pending</Button>;
             case 'accepted':
-                return <Button variant="outline">Message</Button>;
+                return <Button onClick={() => setMessagesPopup(true)} variant="outline">Message</Button>;
             case 'not_connected':
             default:
                 return <Button onClick={handleConnect}>Connect</Button>;
@@ -223,7 +224,7 @@ const Profile = ({ params }: ProfileProps) => {
                 </CardContent>
             </Card>
 
-            <MessagingPopup currentUserId={currentUserId} recipientId={user_id} recipientName={userData?.username} />
+            {messagePopup && <MessagingPopup setMessagesPopup={setMessagesPopup} currentUserId={currentUserId} recipientId={user_id} recipientName={userData?.username} />}
         </div>
     );
 };

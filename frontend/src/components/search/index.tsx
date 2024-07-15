@@ -31,6 +31,8 @@ const SearchBox = () => {
     };
 
     const handleUserClick = (userId: string) => {
+        setSearchTerm("")
+        setResults([]);
         router.push(`/user/${userId}`);
     };
 

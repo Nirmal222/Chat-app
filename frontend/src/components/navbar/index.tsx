@@ -16,19 +16,22 @@ import {
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 export default function Navbar() {
     const router = useRouter()
+    const pathname = usePathname()
+    const isHomePath = pathname === "/"
     const { getItem, removeItems } = useStorage();
     const token = getItem('token', 'session');
     const userId = getItem('userId', 'session');
+    const username = getItem('username', 'session');
     const handleLogout = () => {
         removeItems(['token', 'userId'], 'session');
         router.push("/");
     };
     return (
-        <header className="flex h-20 w-full shrink-0 items-center px-4 md:px-6 sticky top-0 bg-white" style={{ zIndex: 1 }}>
+        <header className="flex h-20 w-full shrink-0 items-center px-4 md:px-6 sticky top-0 bg-white gap-6" style={{ zIndex: 1 }}>
             <Sheet>
                 <SheetTrigger asChild>
                     <Button variant="outline" size="icon" className="lg:hidden">
@@ -114,13 +117,25 @@ export default function Navbar() {
 
                     </Link>
                 }
+                {
+                    token &&
+                    <Link
+                        href="/connections"
+                        className="group inline-flex h-9 w-max items-center justify-center rounded-md bg-white px-4 py-2 text-sm font-medium transition-colors hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:text-gray-900 focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-gray-100/50 data-[state=open]:bg-gray-100/50 dark:bg-gray-950 dark:hover:bg-gray-800 dark:hover:text-gray-50 dark:focus:bg-gray-800 dark:focus:text-gray-50 dark:data-[active]:bg-gray-800/50 dark:data-[state=open]:bg-gray-800/50"
+                        prefetch={false}
+                    >
+                        Connections
+                    </Link>
+                }
             </nav>
-            {token && userId && <DropdownMenu>
+            {token && userId && !isHomePath && <DropdownMenu>
+                <p className="font-bold text-slate-600">{username}</p>
+                {" "}
                 <DropdownMenuTrigger asChild>
                     <Button
                         variant="outline"
                         size="icon"
-                        className="overflow-hidden rounded-full"
+                        className="overflow-hidden rounded-full m-2"
                     >
                         <UserRound />
                     </Button>

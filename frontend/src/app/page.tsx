@@ -29,9 +29,7 @@ export default function Home() {
       <h1 className="text-6xl font-bold">WELCOME TO CHATS</h1>
       <br />
       {!isLoading && (
-        isLoggedIn ? (
-          <Button onClick={handleLogout}>Logout</Button>
-        ) : (
+        !isLoggedIn && (
           <Button onClick={() => router.push("/login")}>Get Started</Button>
         )
       )}

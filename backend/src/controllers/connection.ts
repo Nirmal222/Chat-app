@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import Connection from '../models/connection';
 import { asyncHandler } from '../utils/asyncHandler';
 import User from '../models/user';
+import { logger } from '../utils/logger';
 
 export const sendConnectionRequest = asyncHandler(async (req: Request, res: Response) => {
     const { requesterId, recipientId } = req.body;
@@ -49,14 +50,35 @@ export const respondToConnectionRequest = asyncHandler(async (req: Request, res:
     res.json({ message: 'Connection request updated' });
 });
 
-export const getUserConnections = asyncHandler(async (req: Request, res: Response) => {
-    const userId = req.params.userId;
-    const connections = await Connection.find({
-        $or: [{ requester: userId }, { recipient: userId }],
-        status: 'accepted'
-    }).populate('requester recipient', 'username');
-    res.json(connections);
-});
+export const getUserConnections = async (req: Request, res: Response) => {
+    logger.info("--> getUserConnections")
+    try {
+        const userId = req.params.userId;
+
+        logger.info(`Fetching connections for user: ${userId}`);
+
+        const connections = await Connection.find({
+            $or: [{ requester: userId }, { recipient: userId }],
+            status: 'accepted'
+        })
+        const connectionsWithNames = await Promise.all(connections.map(async (conn) => {
+            const requester = await User.findById(conn.requester).select('-password -__v');
+            return {
+                ...conn.toObject(),
+                username: requester ? requester.username : null,
+            };
+        }));
+
+        logger.info(`Successfully fetched ${connectionsWithNames.length} connections for user: ${userId}`);
+
+        res.json(connectionsWithNames);
+    } catch (error) {
+        logger.error('Error in getUserConnections:', error);
+        res.status(500).json({ message: 'An error occurred while fetching user connections' });
+    } finally {
+        logger.info("<-- getUserConnections")
+    }
+};
 
 export const getUserConnection = asyncHandler(async (req: Request, res: Response) => {
     try {

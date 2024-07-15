@@ -6,10 +6,10 @@ const router = express.Router();
 
 router.use(authMiddleware);
 
-router.post('/request', sendConnectionRequest);
-router.put('/respond', respondToConnectionRequest);
 router.get('/:userId', getUserConnections);
 router.get('/:userId/:otherUserId', getUserConnection);
-router.post("/requests", getRequests)
+router.post('/request', sendConnectionRequest);
+router.patch('/respond', respondToConnectionRequest);
+router.post('/requests', getRequests)
 
 export default router;
