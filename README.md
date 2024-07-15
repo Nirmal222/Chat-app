@@ -42,6 +42,10 @@ backend/
  2. install dependencies by "npm install" command.
  4. Run "npm run dev" for dev environment / "npm run start" for prod ennvironmennt
 
+
+
+
+
 # Chat-app Frontend Documentation
 
 ## Table of Contents
