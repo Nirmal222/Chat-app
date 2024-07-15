@@ -89,7 +89,7 @@ import { Types } from 'mongoose';
 export const setupSocketIO = (server: HTTPServer) => {
   const io = new SocketIOServer(server, {
     cors: {
-      origin: process.env.CLIENT_URL || 'http://localhost:3000',
+      origin: process.env.CLIENT_URL,
       methods: ['GET', 'POST'],
     },
   });

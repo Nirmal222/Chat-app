@@ -5,7 +5,6 @@ import cors from 'cors';
 
 import connectDB from './config/db';
 import { setupSocketIO } from './socket/socketHandler';
-import { errorHandler } from './middlewares/errorHandler';
 
 import authRoutes from './routes/auth';
 import connectionRoutes from './routes/connections';
@@ -14,7 +13,7 @@ import userRoutes from './routes/user';
 
 dotenv.config();
 
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT;
 
 const app = express();
 
@@ -23,7 +22,7 @@ const server = createServer(app);
 setupSocketIO(server);
 
 app.use(cors({
-  origin: process.env.CLIENT_URL || 'http://localhost:3000',
+  origin: process.env.CLIENT_URL,
   credentials: true,
 }));
 app.use(express.json());
