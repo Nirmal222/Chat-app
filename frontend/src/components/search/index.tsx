@@ -6,6 +6,8 @@ import axiosInstance from "@/utils/axios";
 import { IUser } from "@/interfaces/user";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { useRouter } from "next/navigation";
+import axios from "axios";
+import { toast } from "sonner";
 
 const SearchBox = () => {
     const router = useRouter()
@@ -14,11 +16,20 @@ const SearchBox = () => {
 
     const debouncedSearch = useCallback(
         debounce(async (term: string) => {
-            if (term) {
-                const response = await axiosInstance.get(`/users/search?query=${term}`);
-                setResults(response.data);
-            } else {
-                setResults([]);
+            try {
+                if (term) {
+                    const response = await axiosInstance.get(`/users/search?query=${term}`);
+                    setResults(response.data);
+                } else {
+                    setResults([]);
+                }
+            } catch (error) {
+                if (axios.isAxiosError(error)) {
+                    if (error.response && error.response.status === 401) {
+                        toast.warning("Please Login")
+                    }
+                    setResults([]);
+                }
             }
         }, 300),
         []

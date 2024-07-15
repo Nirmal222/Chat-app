@@ -1,7 +1,6 @@
 'use client';
 import { useState } from "react"
-import Image from "next/image"
-import Link from "next/link"
+import Link from 'next/link'
 import { toast } from "sonner"
 
 import { Button } from "@/components/ui/button"
@@ -10,6 +9,7 @@ import { Label } from "@/components/ui/label"
 import axiosInstance from "@/utils/axios";
 import { redirect, useRouter } from "next/navigation";
 import useStorage from "@/hooks/useSessionStorage";
+import axios from "axios";
 
 export default function Login() {
     const router = useRouter()
@@ -43,7 +43,13 @@ export default function Login() {
                 throw new Error('Login failed')
             }
         } catch (error) {
-            if (error instanceof Error) {
+            if (axios.isAxiosError(error)) {
+                if (error.response && error.response.status === 401) {
+                    toast.warning("Credentials not found. Please,", {
+                        description: <Link href="/register" className="underline font-semibold text-blue">Signup</Link>,
+                      })
+                    return 
+                }
                 toast.error(error.message)
             } else {
                 toast.error("An unexpected error occurred.")
