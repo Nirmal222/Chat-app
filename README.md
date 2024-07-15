@@ -37,11 +37,12 @@ backend/
 `PORT=4000`
 `CLIENT_URL=http://localhost:3000`
 `MONGO_URI=mongodb://localhost:27017/chat_app`
+`NEXT_PUBLIC_JWT_SECRET=CHATAPP`
 
  2. install dependencies by "npm install" command.
  4. Run "npm run dev" for dev environment / "npm run start" for prod ennvironmennt
 
- # Chat-app Frontend Documentation
+# Chat-app Frontend Documentation
 
 ## Table of Contents
 1. [Introduction](#introduction)
@@ -53,35 +54,32 @@ backend/
 The frontend of our real-time chat application provides a user-friendly interface for sending connection requests, accepting requests, and engaging in real-time chat sessions with connected users.
 
 ## Technology Stack
-- React.js
+- Next JS
 - TypeScript
 - Socket.IO Client
-- [Add any additional frontend libraries/frameworks used]
 
 ## Project Structure
 ```
 frontend/
 ├── public/
 ├── src/
+│   ├── app/
 │   ├── components/
-│   ├── pages/
-│   ├── context/
 │   ├── hooks/
-│   ├── services/
-│   ├── styles/
-│   ├── types/
+│   ├── hooks/
+│   ├── interfaces/
+│   ├── lib/
 │   ├── utils/
-│   └── App.tsx
 ├── package.json
 └── tsconfig.json
+...
 ```
 
 ## Installation Steps
 1. Environment Configuration:
    Create a `.env` file in the root of the frontend directory with the following content:
-   ```
-   REACT_APP_API_URL=http://localhost:4000
-   ```
+ 
+	`NEXT_PUBLIC_BACKEND_URL=http://localhost:4000/api`
 
 2. Install Dependencies:
    Run the following command in the frontend project root directory:
@@ -98,5 +96,3 @@ frontend/
      ```
      npm run build
      ```
-
-[Add any additional setup steps or configuration required for the frontend]
