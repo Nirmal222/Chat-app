@@ -1,7 +1,7 @@
 # Chat-app
 
 
-# Backend
+# Chat-app Backend Documentation
 
 ## Table of Contents
 1. [Introduction](#introduction)
@@ -45,7 +45,7 @@ backend/
 
 
 
- 
+
 # Chat-app Frontend Documentation
 
 ## Table of Contents
