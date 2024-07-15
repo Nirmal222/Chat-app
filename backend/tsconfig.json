@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "module": "commonjs",
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "sourceMap": true,
+    "moduleResolution": "node",
+    "outDir": "./dist",
+    "strict": true,
+    "lib": ["esnext", "dom"],
+    "typeRoots": ["./node_modules/@types", "./src/types"],
+    "types": ["express"]
+  },
+  "include": ["src/**/*"],
+  "ts-node": {
+    "files": true,
+    "transpileOnly": true,
+    "ignore": ["node_modules/"]
+  }
+}
