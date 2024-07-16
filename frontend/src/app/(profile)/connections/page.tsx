@@ -35,8 +35,7 @@ const ConnectionsScreen: React.FC = () => {
     const fetchConnections = async () => {
         setLoading(true);
         try {
-            const response = await axiosInstance(`/connections/${userId}`);  
-            console.log(response);
+            const response = await axiosInstance(`/connections/${userId}`); 
             setConnections(response?.data);
         } catch (error) {
             console.error('Error fetching connections:', error);

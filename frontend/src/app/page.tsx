@@ -26,7 +26,7 @@ export default function Home() {
 
   return (
     <div className="h-[50vh] flex flex-col justify-center items-center px-4">
-      <h1 className="text-6xl font-bold">WELCOME TO CHATS</h1>
+      <h1 className="text-6xl font-bold">WELCOME TO WTA CHATS</h1>
       <br />
       {!isLoading && (
         !isLoggedIn && (

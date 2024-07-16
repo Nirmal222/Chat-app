@@ -1,5 +1,10 @@
 # Chat-app
 
+![Alt Home](assets/1.jpg)
+![Alt Login](assets/1.jpg)
+![Alt Signup](assets/1.jpg)
+![Alt Connections](assets/1.jpg)
+![Alt Profile](assets/1.jpg)
 
 # Chat-app Backend Documentation
 
@@ -70,7 +75,7 @@ frontend/
 ├── src/
 │   ├── app/
 │   ├── components/
-│   ├── hooks/
+│   ├── contants/
 │   ├── hooks/
 │   ├── interfaces/
 │   ├── lib/

@@ -34,7 +34,7 @@ const ConnectionRequestsScreen: React.FC = () => {
         setLoading(true);
         try {
             const response = await axiosInstance.post(`/connections/requests`, {
-                recepient: userId,
+                recipient: userId,
                 status: "pending"
             });
             setRequests(response?.data);
