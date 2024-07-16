@@ -1,10 +1,10 @@
 # Chat-app
 
 ![Alt Home](assets/1.png)
-![Alt Login](assets/1.png)
-![Alt Signup](assets/1.png)
-![Alt Connections](assets/1.png)
-![Alt Profile](assets/1.png)
+![Alt Login](assets/2.png)
+![Alt Signup](assets/3.png)
+![Alt Connections](assets/4.png)
+![Alt Profile](assets/5.png)
 
 # Chat-app Backend Documentation
 
